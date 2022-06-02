@@ -65,12 +65,17 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        ScoreText.text = $"Score : {m_Points}";        
     }
 
     public void GameOver()
     {
         m_GameOver = true;
+        if (m_Points > GameManager.Instance.maxScore)
+        {            
+            GameManager.Instance.maxScore = m_Points;
+            GameManager.Instance.SaveData();
+        }
         GameOverText.SetActive(true);
     }
 }
