@@ -13,9 +13,14 @@ public class StartMenuUI : MonoBehaviour
 
     private void Awake()
     {
-        if(GameManager.Instance.username != null && GameManager.Instance.maxScore > 0)
+        Debug.Log("Max data "+ GameManager.Instance.maxUsername + " " + GameManager.Instance.maxScore);
+        if(GameManager.Instance.maxUsername != null && GameManager.Instance.maxScore > 0)
         {
-            username.text = "Best score: " + GameManager.Instance.username + " : " + GameManager.Instance.maxScore;
+            username.text = "Best score: " + GameManager.Instance.maxUsername + " : " + GameManager.Instance.maxScore;
+        }
+        else
+        {
+            username.text = "Best score still unissigned!";
         }
     }
 

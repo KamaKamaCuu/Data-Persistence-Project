@@ -7,19 +7,21 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public string username { get; set; }
+    public string maxUsername { get; set; }
     public int maxScore { get; set; }
     private string persistencePath;
 
     [System.Serializable]
     private class BestScore
     {
-        public string username;
+        public string maxUsername;
         public int maxScore;
     }
 
     private void Awake()
     {
         persistencePath = Application.persistentDataPath + "/saveFile.json";
+        
         if (Instance == null)
         {
             Instance = this;
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
     public void SaveData()
     {
         BestScore bestScore = new BestScore();
-        bestScore.username = this.username;
+        bestScore.maxUsername = this.username;
         bestScore.maxScore = this.maxScore;        
         File.WriteAllText(persistencePath,JsonUtility.ToJson(bestScore));
     }
@@ -41,7 +43,7 @@ public class GameManager : MonoBehaviour
         if(File.Exists(persistencePath))
         {
             BestScore bestScore = JsonUtility.FromJson<BestScore>(File.ReadAllText(persistencePath));
-            this.username = bestScore.username;
+            this.maxUsername = bestScore.maxUsername;
             this.maxScore = bestScore.maxScore;
         }        
     }

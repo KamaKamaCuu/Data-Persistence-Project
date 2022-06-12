@@ -74,6 +74,7 @@ public class MainManager : MonoBehaviour
         if (m_Points > GameManager.Instance.maxScore)
         {            
             GameManager.Instance.maxScore = m_Points;
+            GameManager.Instance.maxUsername = GameManager.Instance.username;
             GameManager.Instance.SaveData();
         }
         GameOverText.SetActive(true);
