@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public string username { get; set; }
     public string maxUsername { get; set; }
     public int maxScore { get; set; }
+    public string date;    
     private string persistencePath;
 
     [System.Serializable]
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
     {
         public string maxUsername;
         public int maxScore;
+        public string date;
     }
 
     private void Awake()
@@ -34,7 +37,8 @@ public class GameManager : MonoBehaviour
     {
         BestScore bestScore = new BestScore();
         bestScore.maxUsername = this.username;
-        bestScore.maxScore = this.maxScore;        
+        bestScore.maxScore = this.maxScore;
+        bestScore.date = System.DateTime.Now.ToShortDateString();
         File.WriteAllText(persistencePath,JsonUtility.ToJson(bestScore));
     }
 
@@ -45,6 +49,7 @@ public class GameManager : MonoBehaviour
             BestScore bestScore = JsonUtility.FromJson<BestScore>(File.ReadAllText(persistencePath));
             this.maxUsername = bestScore.maxUsername;
             this.maxScore = bestScore.maxScore;
+            this.date = bestScore.date;
         }        
     }
 }

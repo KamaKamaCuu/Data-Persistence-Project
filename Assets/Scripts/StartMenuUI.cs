@@ -37,4 +37,10 @@ public class StartMenuUI : MonoBehaviour
             Application.Quit(); 
         #endif
     }
+
+    public void LoadBestScore()
+    {
+        GameManager.Instance.RetrieveData();
+        SceneManager.LoadScene(2);
+    }
 }
